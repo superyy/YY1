@@ -1,8 +1,9 @@
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
-int ArraySum(int array[], int num)
+int ArraySum(int* array, int num)
 {
     int sum = 0;
     for(int i = 0; i < num; i++)
@@ -14,10 +15,19 @@ int ArraySum(int array[], int num)
 
 int main()
 {
-    int result;
-    int length=3;
-    int a[3] = {-2574,-4010,8243};
-    result = ArraySum(a, length);
+    int length,x;
+    cout<<"输入所取数据长度"<<endl;
+    cin>>length;
+    ifstream in("D:\\Book.txt");
+    int* a = new int[length];
+    for(int i = 0; i < length; i++)
+    {
+        in >> x;
+        a[i] = x;
+    }
+    int result = ArraySum(a, length);
     cout << "The result is :" << result <<endl;
+    in.close();
+    delete a;
     return 0;
 }
