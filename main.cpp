@@ -2,15 +2,22 @@
 
 using namespace std;
 
-int main()
+int ArraySum(int array[], int num)
 {
-    int array[]={-2574,-4010};
-    int sum ;
-    for(int i = 0; i < 2; i++)
+    int sum = 0;
+    for(int i = 0; i < num; i++)
     {
         sum += array[i];
     }
+    return sum;
+}
 
-    cout << "result" << sum <<endl;
+int main()
+{
+    int result;
+    int length=3;
+    int a[3] = {-2574,-4010,8243};
+    result = ArraySum(a, length);
+    cout << "The result is :" << result <<endl;
     return 0;
 }
