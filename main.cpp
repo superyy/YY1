@@ -1,33 +1,46 @@
 #include <iostream>
 #include <fstream>
-
 using namespace std;
 
-int ArraySum(int* array, int num)
+int Search(char *str1,char *str2)
 {
-    int sum = 0;
-    for(int i = 0; i < num; i++)
+    char *m=str1;                        //m指向句子
+    int i=0,k=0;                        //k统计个数
+    while(*m!='\0')
     {
-        sum += array[i];
+        while(*m!=' ') //单词结束退出循环 查找下个单词
+        {
+            if(*m!=str2[i])  //遇到不同字母 指向下一个单词
+                while(*m!=' ') m++;
+            else      //字母相同
+            {
+                if(*(m+1)==' ')
+                {
+                    k++;
+                    m++;
+                }
+                else
+                {
+                    i++;
+                    m++;
+                }
+            }
+        }
+        m++;
+        i=0;
     }
-    return sum;
+    return k+1;
 }
-
 int main()
 {
-    int length,x;
-    cout<<"输入所取数据长度"<<endl;
-    cin>>length;
-    ifstream in("D:\\Book.txt");
-    int* a = new int[length];
-    for(int i = 0; i < length; i++)
-    {
-        in >> x;
-        a[i] = x;
-    }
-    int result = ArraySum(a, length);
-    cout << "The result is :" << result <<endl;
+    char word[100],sentence[100];
+    ifstream in("D:\\A_tale.txt");
+    int i=0;
+    while (in>>sentence[i])
+    i++;
+    cout<<"请输入要查找的单词"<<endl;
+    gets(word);
+    cout<<"单词的个数："<<Search(sentence,word);
     in.close();
-    delete a;
     return 0;
 }
